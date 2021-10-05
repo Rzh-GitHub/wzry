@@ -1,22 +1,23 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Main from '../views/Main.vue'
+import CategoryEdit from '../views/CategoryEdit'
+import  CategoryList from '../views/CategoryList'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    name: 'Main',
+    component: Main,
+    children: [
+      { path: "categories/create", component: CategoryEdit },
+      // props: true 把 url 参数（比如 id）注入到本组件（CategoryEdit）
+      // 在本组件中可以直接使用 id
+      { path: '/categories/edit/:id', component: CategoryEdit, props: true },
+      { path: '/categories/list', component: CategoryList },
+    ]
   }
 ]
 
