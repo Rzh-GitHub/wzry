@@ -27,22 +27,25 @@ export default {
   },
   methods: {
     async save() {
-      const res = await this.$http.post("categories", this.model);
+      if (this.id) {
+        await this.$http.put(`categories/${this.id}`, this.model);
+      } else {
+        await this.$http.post("categories", this.model);
+      }
       this.$router.push("/categories/list");
       this.$message({
         type: "success",
-        message: "保存成功",
+        message: `${this.id ? "修改" : "保存"}成功`,
       });
-      console.log(res);
     },
     async fetch() {
-        const res = await this.$http.get(`categories/${this.id}`)
-        this.model = res.data
-    }
+      const res = await this.$http.get(`categories/${this.id}`);
+      this.model = res.data;
+    },
   },
   created() {
-      this.id && this.fetch()
-  }
+    this.id && this.fetch();
+  },
 };
 </script>
 

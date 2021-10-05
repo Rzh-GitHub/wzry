@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from '../views/Main.vue'
 import CategoryEdit from '../views/CategoryEdit'
-import  CategoryList from '../views/CategoryList'
+import CategoryList from '../views/CategoryList'
 
 Vue.use(VueRouter)
 
